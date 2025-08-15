@@ -4,16 +4,25 @@ import {
   Heading,
   Input,
   VStack,
-  Select,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
+import { useEditRoster } from "../roster/player";
 
 const EditRoster = () => {
   const [newPlayer, setNewPlayer] = React.useState({
     name: "",
-    position: "",
+    number: "",
     image: "",
   });
+
+  const { createPlayer } = useEditRoster();
+
+  const handleAddPlayer = async () => {
+    const { success, message } = await createPlayer(newPlayer);
+    console.log("Success:", success);
+    console.log("Message:", message);
+  };
 
   return (
     <Container maxW={"container.sm"}>
@@ -24,7 +33,7 @@ const EditRoster = () => {
         <Box w={"full"} bgColor={"gray.100"} p={6} rounded={"lg"} shadow={"md"}>
           <VStack spacing={4}>
             <Input
-              placeholder="Jack Smith"
+              placeholder="Name"
               name="name"
               type="text"
               value={newPlayer.name}
@@ -33,12 +42,14 @@ const EditRoster = () => {
               }
             />
             <Input
-              placeholder="Position"
-              name="position"
-              type="text"
-              value={newPlayer.position}
+              placeholder="Position Number"
+              name="number"
+              type="number"
+              min={1}
+              max={15}
+              value={newPlayer.number}
               onChange={(e) =>
-                setNewPlayer({ ...newPlayer, position: e.target.value })
+                setNewPlayer({ ...newPlayer, number: e.target.value })
               }
             />
             <Input
@@ -50,6 +61,9 @@ const EditRoster = () => {
                 setNewPlayer({ ...newPlayer, image: e.target.value })
               }
             />
+            <Button onClick={handleAddPlayer} w="full">
+              Add Player
+            </Button>
           </VStack>
         </Box>
       </VStack>
