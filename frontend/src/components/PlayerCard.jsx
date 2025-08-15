@@ -14,10 +14,6 @@ const PlayerCard = ({ player, showControls, onDelete }) => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isRemoved, setIsRemoved] = useState(false);
 
-  const handleEdit = (id) => {
-    // TODO: implement edit handler - receives the card's _id
-  };
-
   const handleDelete = async (id) => {
     if (!id) return;
     if (!window.confirm("Are you sure you want to delete this player?")) return;
@@ -68,7 +64,7 @@ const PlayerCard = ({ player, showControls, onDelete }) => {
       w="320px"
       mx="auto"
       p={6}
-      m={4} // <-- add margin around each card
+      m={4}
     >
       <VStack spacing={6} align="center" justify="center" w="100%" py={4}>
         <Image
@@ -90,13 +86,6 @@ const PlayerCard = ({ player, showControls, onDelete }) => {
         {/* show edit/delete only on the edit roster page */}
         {isEditPage && (
           <HStack spacing={3} w="100%" justify="center">
-            <Button
-              size="sm"
-              colorScheme="blue"
-              onClick={() => handleEdit(player._id)}
-            >
-              Edit
-            </Button>
             <Button
               size="sm"
               colorScheme="red"

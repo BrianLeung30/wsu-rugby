@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { deleteGame } from "../../../backend/controllers/game.controller";
 
 export const useEditSchedule = create((set) => ({
   games: [],
@@ -29,5 +30,24 @@ export const useEditSchedule = create((set) => ({
     const res = await fetch("/api/games");
     const data = await res.json();
     set({ games: data.data });
+  },
+  deleteGame: async (gid) => {
+    const res = await fetch(`/api/games/${gid}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (!data.success) {
+      return {
+        success: false,
+        message: data.message || "Failed to delete game",
+      };
+    }
+    set((state) => ({
+      games: state.games.filter((game) => game._id !== gid),
+    }));
+    return {
+      success: true,
+      message: data.message || "Game deleted successfully",
+    };
   },
 }));

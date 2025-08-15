@@ -6,9 +6,12 @@ import {
   VStack,
   Button,
   Checkbox,
+  SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { useEditSchedule } from "../schedule/game";
+import GameCard from "../components/GameCard";
 
 const EditSchedule = () => {
   const [newGame, setNewGame] = React.useState({
@@ -19,7 +22,11 @@ const EditSchedule = () => {
     logo: "",
   });
 
-  const { createGame } = useEditSchedule();
+  const { createGame, games, fetchGames } = useEditSchedule();
+
+  React.useEffect(() => {
+    fetchGames();
+  }, [fetchGames]);
 
   const handleAddGame = async () => {
     const { success, message } = await createGame(newGame);
@@ -32,6 +39,7 @@ const EditSchedule = () => {
       location: "",
       logo: "",
     });
+    fetchGames(); // refresh list after adding
   };
 
   return (
@@ -90,6 +98,16 @@ const EditSchedule = () => {
             </Button>
           </VStack>
         </Box>
+        <Text fontSize="2xl" fontWeight="bold" textAlign="center" mt={8}>
+          Current Schedule
+        </Text>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} w="full">
+          {[...games]
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .map((game) => (
+              <GameCard key={game._id} game={game} />
+            ))}
+        </SimpleGrid>
       </VStack>
     </Container>
   );

@@ -76,7 +76,6 @@ const EditRoster = () => {
           </VStack>
         </Box>
 
-        {/* Player cards below add player section */}
         <Text fontSize="2xl" fontWeight="bold" textAlign="center" mt={8}>
           Current Roster
         </Text>
