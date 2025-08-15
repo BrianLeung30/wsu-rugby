@@ -25,4 +25,9 @@ export const useEditSchedule = create((set) => ({
     set((state) => ({ games: [...state.games, data.data] }));
     return { success: true, message: "Game added successfully" };
   },
+  fetchGames: async () => {
+    const res = await fetch("/api/games");
+    const data = await res.json();
+    set({ games: data.data });
+  },
 }));

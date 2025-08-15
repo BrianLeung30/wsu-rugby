@@ -25,6 +25,13 @@ const EditSchedule = () => {
     const { success, message } = await createGame(newGame);
     console.log("Success:", success);
     console.log("Message:", message);
+    setNewGame({
+      opponent: "",
+      date: "",
+      isHomeGame: true,
+      location: "",
+      logo: "",
+    });
   };
 
   return (

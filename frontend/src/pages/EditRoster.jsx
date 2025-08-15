@@ -22,6 +22,10 @@ const EditRoster = () => {
     const { success, message } = await createPlayer(newPlayer);
     console.log("Success:", success);
     console.log("Message:", message);
+    if (!success) {
+    } else {
+    }
+    setNewPlayer({ name: "", number: "", image: "" });
   };
 
   return (
