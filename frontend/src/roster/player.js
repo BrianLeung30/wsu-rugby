@@ -23,4 +23,23 @@ export const useEditRoster = create((set) => ({
     const data = await res.json();
     set({ players: data.data });
   },
+  deletePlayer: async (pid) => {
+    const res = await fetch(`/api/players/${pid}`, {
+      method: "DELETE",
+    });
+    const data = await res.json();
+    if (!data.success) {
+      return {
+        success: false,
+        message: data.message || "Failed to delete player",
+      };
+    }
+    set((state) => ({
+      players: state.players.filter((player) => player._id !== pid),
+    }));
+    return {
+      success: true,
+      message: data.message || "Player deleted successfully",
+    };
+  },
 }));

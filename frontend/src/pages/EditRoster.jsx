@@ -5,9 +5,12 @@ import {
   Input,
   VStack,
   Button,
+  Text,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import React from "react";
 import { useEditRoster } from "../roster/player";
+import PlayerCard from "../components/PlayerCard";
 
 const EditRoster = () => {
   const [newPlayer, setNewPlayer] = React.useState({
@@ -16,13 +19,18 @@ const EditRoster = () => {
     image: "",
   });
 
-  const { createPlayer } = useEditRoster();
+  const { createPlayer, players, fetchPlayers } = useEditRoster();
+
+  React.useEffect(() => {
+    fetchPlayers();
+  }, [fetchPlayers]);
 
   const handleAddPlayer = async () => {
     const { success, message } = await createPlayer(newPlayer);
     console.log("Success:", success);
     console.log("Message:", message);
     setNewPlayer({ name: "", number: "", image: "" });
+    fetchPlayers(); // refresh list after adding
   };
 
   return (
@@ -67,6 +75,23 @@ const EditRoster = () => {
             </Button>
           </VStack>
         </Box>
+
+        {/* Player cards below add player section */}
+        <Text fontSize="2xl" fontWeight="bold" textAlign="center" mt={8}>
+          Current Roster
+        </Text>
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} w="full">
+          {[...players]
+            .sort((a, b) => a.number - b.number)
+            .map((player) => (
+              <PlayerCard key={player._id} player={player} />
+            ))}
+        </SimpleGrid>
+        {players.length === 0 && (
+          <Text fontSize="xl" textAlign="center" fontWeight="bold">
+            No Players Available
+          </Text>
+        )}
       </VStack>
     </Container>
   );
