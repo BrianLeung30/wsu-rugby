@@ -17,9 +17,11 @@ const Schedule = () => {
         </Text>
 
         <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={10} w={"full"}>
-          {games.map((game) => (
-            <GameCard key={game._id} game={game} />
-          ))}
+          {[...games]
+            .sort((a, b) => new Date(a.date) - new Date(b.date))
+            .map((game) => (
+              <GameCard key={game._id} game={game} />
+            ))}
         </SimpleGrid>
 
         {games.length === 0 && (

@@ -34,13 +34,25 @@ const GameCard = ({ game }) => {
                 h={"auto"}
                 objectFit={"contain"}
               />
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {"Washington State University"}
               </Text>
             </VStack>
             <VStack>
-              <Text fontWeight={"bold"}>{game.location}</Text>
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text fontWeight={"bold"} textAlign="center" w="100%">
+                {game.location}
+              </Text>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {formattedDate}
               </Text>
             </VStack>
@@ -52,7 +64,12 @@ const GameCard = ({ game }) => {
                 h={"auto"}
                 objectFit={"contain"}
               />
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {game.opponent}
               </Text>
             </VStack>
@@ -68,13 +85,25 @@ const GameCard = ({ game }) => {
                 h={"auto"}
                 objectFit={"contain"}
               />
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {game.opponent}
               </Text>
             </VStack>
             <VStack>
-              <Text fontWeight={"bold"}>{game.location}</Text>
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text fontWeight={"bold"} textAlign="center" w="100%">
+                {game.location}
+              </Text>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {formattedDate}
               </Text>
             </VStack>
@@ -86,7 +115,12 @@ const GameCard = ({ game }) => {
                 h={"auto"}
                 objectFit={"contain"}
               />
-              <Text fontSize={"sm"} color={"gray.500"}>
+              <Text
+                fontSize={"sm"}
+                color={"gray.500"}
+                textAlign="center"
+                w="100%"
+              >
                 {"Washington State University"}
               </Text>
             </VStack>

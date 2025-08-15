@@ -18,4 +18,9 @@ export const useEditRoster = create((set) => ({
     set((state) => ({ players: [...state.players, data.data] }));
     return { success: true, message: "Player added successfully" };
   },
+  fetchPlayers: async () => {
+    const res = await fetch("/api/players");
+    const data = await res.json();
+    set({ players: data.data });
+  },
 }));
