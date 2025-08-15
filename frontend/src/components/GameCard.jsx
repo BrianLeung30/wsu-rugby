@@ -1,5 +1,5 @@
-import { Box, Image, HStack, VStack, Text } from "@chakra-ui/react";
-const GameCard = ({ game }) => {
+import { Box, Image, HStack, VStack, Text, Button } from "@chakra-ui/react";
+const GameCard = ({ game, onDelete }) => {
   const dateObj = game?.date ? new Date(game.date) : null;
   const formattedDate =
     dateObj && !isNaN(dateObj)
@@ -127,6 +127,19 @@ const GameCard = ({ game }) => {
           </>
         )}
       </HStack>
+
+      {/* New: Delete button inside the card when onDelete is provided */}
+      {onDelete && (
+        <Box mt={3} textAlign="center">
+          <Button
+            colorScheme="red"
+            size="sm"
+            onClick={() => onDelete(game._id)}
+          >
+            Delete
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

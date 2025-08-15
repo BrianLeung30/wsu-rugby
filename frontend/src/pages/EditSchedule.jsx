@@ -22,7 +22,7 @@ const EditSchedule = () => {
     logo: "",
   });
 
-  const { createGame, games, fetchGames } = useEditSchedule();
+  const { createGame, games, fetchGames, deleteGame } = useEditSchedule();
 
   React.useEffect(() => {
     fetchGames();
@@ -40,6 +40,15 @@ const EditSchedule = () => {
       logo: "",
     });
     fetchGames(); // refresh list after adding
+  };
+
+  // New: delete handler for Edit Schedule page
+  const handleDelete = async (gid) => {
+    const { success, message } = await deleteGame(gid);
+    console.log("Delete:", success, message);
+    if (success) {
+      fetchGames();
+    }
   };
 
   return (
@@ -105,7 +114,12 @@ const EditSchedule = () => {
           {[...games]
             .sort((a, b) => new Date(a.date) - new Date(b.date))
             .map((game) => (
-              <GameCard key={game._id} game={game} />
+              <GameCard
+                key={game._id}
+                game={game}
+                // pass the delete handler down; GameCard will call it with the game._id
+                onDelete={handleDelete}
+              />
             ))}
         </SimpleGrid>
       </VStack>
